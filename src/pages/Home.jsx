@@ -6,7 +6,9 @@ const Home = () => {
    
     
     return (
-       <div></div>
+       <div>
+           <p>home</p>
+       </div>
     )
 }
 export default Home;

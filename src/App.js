@@ -7,36 +7,39 @@ import {
 import './App.css';
 import React from 'react';
 //pages
+import Login from './pages/Login'
 import Home from './pages/Home'
+import Analytics from './pages/Analytics'
 // const component
-import Header from './components/Header'
-import Footer from './components/Footer'
+import SideBar from './components/SideBar'
 
 const configComponent = (component) => {
     return (
-        <div>
-            <Header />
-            <div className="mt-12 mb-[60px]">
+        <div className="flex">
+            <SideBar />
+            <div className="bg-[#f1f5f9] w-full">
                 {component}
             </div>
-
-            <Footer />
         </div>
     )
 }
 let path = [
- 
     {
         path: '/dashboard',
         component: configComponent(<Home />)
     },
-  
+    {
+        path: '/analytics',
+        component: configComponent(<Analytics />)
+    },
+
 ]
 
 
 function App() {
     return (
         <Routes>
+            <Route path="/" element={<Login />} />
             {path.map((item, index) => {
                 return (
                     <Route path={item.path} element={item.component} key={index} />
