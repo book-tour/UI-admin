@@ -10,6 +10,9 @@ import React from 'react';
 import Login from './pages/Login'
 import Home from './pages/Home'
 import Analytics from './pages/Analytics'
+import Destination from './pages/Destination'
+import Tour from './pages/Tour'
+import Payment from './pages/Payment'
 // const component
 import SideBar from './components/SideBar'
 
@@ -27,6 +30,18 @@ let path = [
     {
         path: '/dashboard',
         component: configComponent(<Home />)
+    },
+    {
+        path: '/tour',
+        component: configComponent(<Tour />)
+    },
+    {
+        path: '/destination',
+        component: configComponent(<Destination />)
+    },
+    {
+        path: '/payment',
+        component: configComponent(<Payment />)
     },
     {
         path: '/analytics',

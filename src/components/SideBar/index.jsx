@@ -18,12 +18,32 @@ const SideBar = () => {
         {
             pathname: "/dashboard",
             title: "Dashboard",
-            icon:"tachometer-alt"
+            icon: "tachometer-alt"
+        },
+        {
+            pathname: "/tour",
+            title: "Tour",
+            icon: "map-marked-alt"
+        },
+        {
+            pathname: "/destination",
+            title: "Destination",
+            icon: "plane-arrival"
+        },
+        {
+            pathname: "/payment",
+            title: "Payment",
+            icon: "credit-card"
         },
         {
             pathname: "/analytics",
             title: "Analytics",
-            icon:"chart-line"
+            icon: "chart-line"
+        },
+        {
+            pathname: "/",
+            title: "Log out",
+            icon: "sign-out-alt"
         }
     ]
     return (
@@ -63,7 +83,7 @@ export default SideBar;
 
 const ItemSideBar = ({ props }) => {
     const classes = useStyles();
-    const { pathname, title,icon } = props;
+    const { pathname, title, icon } = props;
 
     return (
         <NavLink exact to={pathname} activeClassName="activeClicked">
@@ -83,11 +103,12 @@ const useStyles = makeStyles((theme) => ({
         fontSize: "17px",
         "&:hover": {
             color: "#63b4f4",
+            fontWeight: '500'
         }
     },
     active: {
         color: "#63b4f4",
         backgroundColor: "#cde7fe",
-        fontWeight:'500'
+        fontWeight: '500'
     }
 }));
