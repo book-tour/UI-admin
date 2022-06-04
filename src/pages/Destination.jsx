@@ -1,79 +1,120 @@
+import React, { useEffect, useState } from 'react';
+import { DataGrid } from '@material-ui/data-grid';
+import TugoContext from '../contexts/tugo.context';
+import clsx from 'clsx';
 
-import ReactTable from 'react-table'
-import 'react-table/react-table.css'
-
-
+import IconHandle from '../components/IconHandle';
+import HandleDestination from '../components/Form/HandleDestination';
+import swal from 'sweetalert';
 const Destination = () => {
-    const columns = [{
-        header: 'Name',
-        accessor: 'name' // Cái này sẽ là đại diện cho giá trị của thuộc tính của phần tử ở cột này. Với thuộc tính đơn giản thì chỉ cần truyền vào key của đối tượng trong data.
-    }, {
-        header: 'Age',
-        accessor: 'age',
-        Cell: props => <span className='number'>{props.value}</span> // Tùy biến component Cell.
-    }, {
-        id: 'friendName', // Khi accessor không phải là 1 chuỗi thì phải cung cấp id để đại diện cho thuộc tính cột.
-        header: 'Friend Name',
-        accessor: d => d.friend.name // Tùy biến giá trị đại diện cho giá trị của thuộc tính của phần tử ở cột này.
-    }, {
-        header: props => <span>Friend Age</span>, // Tùy biến component Header
-        accessor: 'friend.age' // Khi 1 thuộc tính của dữ liệu có kiểu là 1 đối tượng, chúng ta cũng có thể cung cấp đường dẫn đến thuộc tính cần lấy giá trị.
-    }];
+    const tugo = new TugoContext();
+    const [listDestination, setListDestination] = useState([]);
 
+    const [checkDelete, setCheckDelete] = useState(false);
+    const [checkEdit, setCheckEdit] = useState(false);
+    const [checkHandle, setCheckHandle] = useState('');
+    const [listCheck, setListCheck] = useState([]);
 
+    const handleCheckBoxChange = (listIndex) => {
+        console.log(listIndex);
+        setCheckHandle('')
+        setListCheck(listIndex);
+        if (listIndex.length == 1) {
+            setCheckEdit(true);
+            setCheckDelete(true);
+        }
+        else if (listIndex.length > 1) {
+            setCheckEdit(false);
+            setCheckDelete(true);
+        }
+        else {
+            setCheckEdit(false);
+            setCheckDelete(false);
+        }
+
+    }
+    const handleDelete = async () => {
+        console.log(listCheck);
+        let count = 0;
+        for (let i = 0; i < listCheck.length; i++) {
+            try {
+                let a = await tugo.deleteDestination({ 'id': listCheck[i] })
+                console.log(a);
+                count++;
+            } catch (error) {
+                swal("Error", 'Hiện đang có tour ở điểm du lịch này, hãy xóa đi những tour đó trước', "error");
+                break;
+            }
+
+        }
+        if (count == listCheck.length) {
+            swal("Success", 'Xóa thành công', "success");
+        }
+        let data = await tugo.getListDestination();
+        setListDestination(data.data);
+    }
+    useEffect(async () => {
+        let data = await tugo.getListDestination();
+        setListDestination(data.data);
+        console.log(data);
+    }, [])
+    useEffect(async () => {
+        let data = await tugo.getListDestination();
+        setListDestination(data.data);
+        console.log(data);
+    }, [checkHandle])
     return (
+
         <div className="p-3">
-            <p className='font-bold text-2xl'>List destinations</p>
-            <ReactTable
-                data={data}
-                columns={columns}
-                defaultPageSize={5}
-            />
+            <div className='flex items-center my-3'>
+                <p className='font-bold text-2xl my-0 mr-3'>List destinations</p>
+                <IconHandle type='edit' visible={checkEdit} onClick={() => setCheckHandle('edit')} />
+                <IconHandle type='delete' visible={checkDelete} onClick={handleDelete} />
+                <IconHandle type='create' onClick={() => setCheckHandle('create')} />
+            </div>
+            <div style={{ height: 400, width: '100%' }} className='bg-white rounded-2xl p-3'>
+                <DataGrid
+                    rows={listDestination}
+                    columns={columns}
+                    pageSize={5}
+                    checkboxSelection
+                    onSelectionModelChange={handleCheckBoxChange}
+                />
+            </div>
+
+            <HandleDestination visible={checkHandle} data={listDestination} listCheck={listCheck} setVisible={setCheckHandle} />
         </div>
     )
 }
 export default Destination;
 
-const data = [{
-    name: 'Nguyen Van A',
-    age: 26,
-    friend: {
-        name: 'Do Van C',
-        age: 23,
-    }
-}, {
-    name: 'Dao Thi B',
-    age: 22,
-    friend: {
-        name: 'Ngo Trung V',
-        age: 24,
-    }
-}, {
-    name: 'Tran Duc C',
-    age: 25,
-    friend: {
-        name: 'Ngo Thanh E',
-        age: 25,
-    }
-}, {
-    name: 'Le Tien N',
-    age: 27,
-    friend: {
-        name: 'Cao Cong G',
-        age: 24,
-    }
-}, {
-    name: 'Pham Hoang M',
-    age: 26,
-    friend: {
-        name: 'Lai Hai D',
-        age: 25,
-    }
-}, {
-    name: 'Duong Van L',
-    age: 23,
-    friend: {
-        name: 'Le Hoang M',
-        age: 23,
-    }
-}];
+
+const columns = [
+    {
+        field: 'id',
+        headerName: 'ID',
+        width: 120
+    },
+    {
+        field: 'name',
+        headerName: 'Tên điểm đến',
+        width: 200,
+        editable: true,
+    },
+    {
+        field: 'alias',
+        headerName: 'Mã định danh',
+        description: 'This column does not editable',
+        width: 220,
+        editable: false,
+
+    },
+    {
+        field: 'description',
+        headerName: 'Mô tả',
+        description: 'This column has a value getter and is not sortable.',
+        editable: true,
+        sortable: false,
+        width: 700,
+    },
+];
