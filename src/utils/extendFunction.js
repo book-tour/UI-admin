@@ -1,5 +1,5 @@
 import { list } from "postcss";
-
+import { v4 as uuidv4 } from 'uuid';
 
 export default class ExtendFunction {
     romanize(num) {
@@ -116,7 +116,7 @@ loop();
             formdata.append("file", piece);
             formdata.append("cloud_name", YOUR_CLOUD_NAME);
             formdata.append("upload_preset", YOUR_UNSIGNED_UPLOAD_PRESET);
-            formdata.append("public_id", `destinations/${idFolder}/myChunkedFile2`);
+            formdata.append("public_id", `destinations/${idFolder}/${uuidv4()}`);
 
             var xhr = new XMLHttpRequest();
             xhr.open("POST", POST_URL, false);
