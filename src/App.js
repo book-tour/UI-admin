@@ -15,6 +15,9 @@ import Tour from './pages/Tour'
 import Payment from './pages/Payment'
 // const component
 import SideBar from './components/SideBar'
+// handle
+import HandleTour  from './pages/handle/HandleTour'
+import HandleSchedule  from './pages/handle/HandleSchedule'
 
 const configComponent = (component) => {
     return (
@@ -47,7 +50,15 @@ let path = [
         path: '/analytics',
         component: configComponent(<Analytics />)
     },
-
+    // handle : edit, create
+    {
+        path: '/tour/handle-tour',
+        component: configComponent(<HandleTour />)
+    },
+    {
+        path: '/tour/handle-schedule/:id',
+        component: configComponent(<HandleSchedule />)
+    },
 ]
 
 

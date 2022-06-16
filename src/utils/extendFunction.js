@@ -69,7 +69,7 @@ export default class ExtendFunction {
         }
     }
     // cloundinary =======================================
-    processFile(file,list,idFolder) {
+    processFile(file, list, idFolder) {
         // var file = e.target.files[0];
         console.log(file);
         // Set your cloud name and unsigned upload preset here:
@@ -89,7 +89,7 @@ export default class ExtendFunction {
             var start = 0;
 
             // setTimeout(loop, 3);
-loop();
+            loop();
             function loop() {
                 var end = start + sliceSize;
 
@@ -116,7 +116,7 @@ loop();
             formdata.append("file", piece);
             formdata.append("cloud_name", YOUR_CLOUD_NAME);
             formdata.append("upload_preset", YOUR_UNSIGNED_UPLOAD_PRESET);
-            formdata.append("public_id", `destinations/${idFolder}/${uuidv4()}`);
+            formdata.append("public_id", `${idFolder}/${uuidv4()}`);
 
             var xhr = new XMLHttpRequest();
             xhr.open("POST", POST_URL, false);

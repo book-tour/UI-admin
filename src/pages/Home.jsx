@@ -142,21 +142,24 @@ const Home = () => {
                 <div className='bg-white rounded-2xl w-full p-2 my-3'>
                     <p className='font-bold'>Top 5 member:</p>
                     {listPayment.map((item, index) => {
-                        return (
-                            <div className='mx-2'>
-                                <div className='flex items-center justify-between '>
-                                    <div className='flex items-center'>
-                                        <img src={"/animal/" + Number(index + 1) + ".png"} alt="" className='rounded-full w-12 h-12' />
-                                        <div className='mx-1'>
-                                            <p className='m-0 font-bold'>{item.full_name}</p>
-                                            <p className='m-0 text-slate-400 italic text-xs'>{item.email}</p>
+                        if (index < 5) {
+                            return (
+                                <div className='mx-2'>
+                                    <div className='flex items-center justify-between '>
+                                        <div className='flex items-center'>
+                                            <img src={"/animal/" + Number(index + 1) + ".png"} alt="" className='rounded-full w-12 h-12' />
+                                            <div className='mx-1'>
+                                                <p className='m-0 font-bold'>{item.full_name}</p>
+                                                <p className='m-0 text-slate-400 italic text-xs'>{item.email}</p>
+                                            </div>
                                         </div>
+                                        <p className='font-bold'>{new Intl.NumberFormat('de-DE').format(item.total_price)} vnd</p>
                                     </div>
-                                    <p className='font-bold'>{item.total_price} vnd</p>
+                                    <hr />
                                 </div>
-                                <hr />
-                            </div>
-                        )
+                            )
+                        }
+                        return null
                     })}
                 </div>
             </div>

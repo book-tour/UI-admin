@@ -4,7 +4,7 @@ import TugoContext from '../contexts/tugo.context';
 import clsx from 'clsx';
 
 import IconHandle from '../components/IconHandle';
-import HandleDestination from '../components/Form/HandleDestination';
+import HandleDestination from './handle/HandleDestination'
 import swal from 'sweetalert';
 const Destination = () => {
     const tugo = new TugoContext();

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import TugoContext from '../../contexts/tugo.context';
 
-import Input from './Input';
-import Textarea from './Textarea';
-import Select from './Select';
-import Button from '../Button'
+import Input from '../../components/Form/Input';
+import Textarea from '../../components/Form/Textarea';
+import Select from '../../components/Form/Select';
+import Button from '../../components/Button'
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 
 import ExtendFunction from '../../utils/extendFunction';
@@ -48,7 +48,7 @@ const HandleDestination = (props) => {
         let i = new Promise((resolve, reject) => {
             if (fileImage.length > 0) {
                 for (let i = 0; i < fileImage.length; i++) {
-                    resolve(extendFunc.processFile(fileImage[i], list, id))
+                    resolve(extendFunc.processFile(fileImage[i], list, `destinations/${id}`))
                 }
             }
             resolve(1)
