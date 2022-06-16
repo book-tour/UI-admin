@@ -31,14 +31,14 @@ const ItemNearestTour = ({ props }) => {
             >{extendFunc.cutString(item.title)}</p>
             <p className='text-slate-400 italic	m-0	'>{item.position} - {item.destination}</p>
             <hr className='m-1' />
-            <div className='flex items-center'>
-                <div className='flex flex-col justify-end'>
-                    <p className='font-bold text-slate-400 m-0'>Gia tien</p>
-                    <p className='font-bold'>{item.money} vnd</p>
+            <div className=''>
+                <div className=''>
+                    <p className='font-bold text-slate-400 m-0'>Giá tiền</p>
+                    <p className='font-bold m-0'>8.560.000 vnd</p>
                 </div>
-                <div className='flex flex-col justify-end'>
-                    <p className='font-bold text-slate-400 m-0'>con lai</p>
-                    <p>{time.resultString}</p>
+                <div className=''>
+                    <p className='font-bold text-slate-400 m-0'>Còn lại</p>
+                    <p>4 giờ 30 phút 20s</p>
                 </div>
             </div>
         </div>

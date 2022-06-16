@@ -52,6 +52,9 @@ const HandleDetailTour = ({ idTour, tours }) => {
                     : null
                 }
             </div>
+            <div>
+                
+            </div>
         </div>
     )
 }
