@@ -37,30 +37,39 @@ const Des = (props) => {
         }))
     }
     const handleDeleteDes = () => {
-        setListSchedule(listSchedule.map((day, indexDay) => {
-            if (indexDay === numberOfDay) {
-                return {
-                    ...day,
-                    schedule: day.schedule.map((des, indexDes) => {
-                        if (indexDes === numberOfDes) {
-                            if (des.des.length > 1)
-                                return {
-                                    ...des,
-                                    des: des.des.filter((item, index) => index < des.des.length - 1)
-                                }
-                            else {
-                                swal("Không thể xóa", "Phải có ít nhất 1 hoạt động trong ngày", "error");
-                                return {
-                                    ...des,
-                                }
+        swal({
+            title: `Bạn có chắc chắn muốn xóa hoạt động này chứ?`,
+            text: "Sau khi xóa, muốn khôi phục hãy reload lại trang",
+            icon: "warning",
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    setListSchedule(listSchedule.map((day, indexDay) => {
+                        if (indexDay === numberOfDay) {
+                            return {
+                                ...day,
+                                schedule: day.schedule.map((des, indexDes) => {
+                                    if (indexDes === numberOfDes) {
+                                        if (des.des.length > 1)
+                                            return {
+                                                ...des,
+                                                des: des.des.filter((item, index) => index < des.des.length - 1)
+                                            }
+                                        else {
+                                            swal("Không thể xóa", "Phải có ít nhất 1 hoạt động trong ngày", "error");
+                                            return {
+                                                ...des,
+                                            }
+                                        }
+                                    }
+                                    return des
+                                })
                             }
                         }
-                        return des
-                    })
+                        return day;
+                    }))
                 }
-            }
-            return day;
-        }))
+            })
     }
     return (
         <div className=''>

@@ -5,7 +5,7 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { makeStyles } from '@material-ui/core/styles';
 import IconHandle from "../IconHandle"
-
+import swal from 'sweetalert';
 
 const Day = (props) => {
     const {
@@ -19,8 +19,17 @@ const Day = (props) => {
 
     const handleDeleteDay = () => {
         console.log(numberOfDay);
-        let newSchedules = listSchedule.filter((item, index) => index !== numberOfDay);
-        setListSchedule(newSchedules);
+        swal({
+            title: `Bạn có chắc chắn muốn xóa hết lịch trình trong ngày ${numberOfDay+1}?`,
+            text: "Sau khi xóa, muốn khôi phục hãy reload lại trang",
+            icon: "warning",
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    let newSchedules = listSchedule.filter((item, index) => index !== numberOfDay);
+                    setListSchedule(newSchedules);
+                }
+            })
     }
     return (
         <div>
@@ -35,7 +44,7 @@ const Day = (props) => {
                 </div>
                 <div>
                     {numberOfDay > 0 ?
-                        <IconHandle type='delete' title='Xóa lịch trình hết trong ngày' visible={true} animation={false} onClick={handleDeleteDay} />
+                        <IconHandle type='delete' title='Xóa hết lịch trình trong ngày' visible={true} animation={false} onClick={handleDeleteDay} />
                         : null
                     }
                     {
