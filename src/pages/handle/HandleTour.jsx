@@ -236,7 +236,7 @@ const HandleTour = () => {
                     value={title || ''}
                     onChange={(e) => setTitle(e.target.value)}
                 />
-                <div className=' text-right'>
+                <div className=' text-right mt-4'>
                     <Button type='cancel' onClick={handleCancel}>Cancel</Button>
                     <Button type='submit' onClick={handleSubmit}>Submit</Button>
                 </div>

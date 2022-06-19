@@ -8,14 +8,38 @@ import Select from '../../components/Form/Select';
 import Button from '../../components/Button'
 
 import clsx from 'clsx';
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import { makeStyles } from '@material-ui/core/styles';
+import IconHandle from '../../components/IconHandle';
 
+import ListSchedule from '../../components/ListSchedule/ListSchedule';
 const HandleDetailTour = ({ idTour, tours }) => {
+    const classes = useStyles();
     const tugo = new TugoContext();
 
     const [id, setId] = useState(0);
     const [description, setDescription] = useState('');
     const [listThumbnail, setListThumbnail] = useState([]);
-    const [schedule, setSchedule] = useState([]);
+    const [listSchedule, setListSchedule] = useState([]);
+
+    const handleCreateNewSchedule = () => {
+        setListSchedule([...listSchedule, {
+            title: '',
+            schedule: [
+                {
+                    title:'',
+                    time: 'Sáng',
+                    des:[]
+                },
+                {
+                    title:'',
+                    time: 'Chiều',
+                    des:[]
+                }
+            ]
+        }])
+    }
+
 
     useEffect(async () => {
         console.log(idTour);
@@ -26,7 +50,7 @@ const HandleDetailTour = ({ idTour, tours }) => {
             setId(info.id);
             setDescription(info.description);
             setListThumbnail(info.listThumbnail);
-            setSchedule(info.schedule);
+            setListSchedule(info.schedule);
         }
     }, [])
 
@@ -52,11 +76,25 @@ const HandleDetailTour = ({ idTour, tours }) => {
                     : null
                 }
             </div>
-            <div>
-                
+            <div className='my-4 px-3'>
+                <div className='flex items-center my-2'>
+                    <span className='font-semibold text-xl mr-2'>Schedule</span>
+                    <IconHandle type='create' animation={true} onClick={handleCreateNewSchedule} />
+                </div>
+            </div>
+            <ListSchedule listSchedule={listSchedule} setListSchedule={setListSchedule} />
+            <div className=' text-right mt-4'>
+                <Button type='cancel' >Cancel</Button>
+                <Button type='submit' >Submit</Button>
             </div>
         </div>
     )
 }
 
 export default HandleDetailTour;
+
+const useStyles = makeStyles((theme) => ({
+    input: {
+        outline: 'none'
+    },
+}));
