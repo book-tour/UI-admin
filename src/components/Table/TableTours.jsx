@@ -48,9 +48,9 @@ const TableTours = ({ listTours }) => {
         <div>
             <div className='flex items-center my-3'>
                 <p className='font-bold text-2xl my-0 mr-3'>List Tours</p>
-                <IconHandle type='edit' visible={checkEdit} onClick={handleEdit} />
-                <IconHandle type='delete' visible={checkDelete} onClick={handleDelete} />
-                <IconHandle type='create' onClick={handleCreate} />
+                <IconHandle type='edit' animation={true} visible={checkEdit} onClick={handleEdit} />
+                <IconHandle type='delete' animation={true} visible={checkDelete} onClick={handleDelete} />
+                <IconHandle type='create' animation={true} onClick={handleCreate} />
             </div>
             <div style={{ height: 400, width: '100%' }} className='bg-white rounded-2xl p-3'>
                 <DataGrid

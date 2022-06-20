@@ -16,6 +16,7 @@ const Day = (props) => {
 
     const classes = useStyles();
     const [showSchedule, setShowSchedule] = useState(false);
+    const [titleInput, setTitleInput] = useState(title);
 
     const handleDeleteDay = () => {
         console.log(numberOfDay);
@@ -31,6 +32,14 @@ const Day = (props) => {
                 }
             })
     }
+    const handleChangeTitleDay = (e) => {
+        setTitleInput(e.target.value);
+
+        let newSchedules = listSchedule;
+        newSchedules[numberOfDay].title = e.target.value;
+        console.log('Bạn đang thay đổi title:',newSchedules.map(item => item.title));
+        setListSchedule(newSchedules);
+    }
     return (
         <div>
             <div className='flex items-center justify-between w-full bg-stone-300 rounded px-2'>
@@ -40,7 +49,7 @@ const Day = (props) => {
                         <span className='mx-1'>{numberOfDay + 1}</span>
                         <span>:</span>
                     </span>
-                    <input type="text" value={title} className={clsx('rounded p-3 bg-stone-300	w-full', classes.input)} />
+                    <input type="text" value={titleInput} className={clsx('rounded p-3 bg-stone-300	w-full', classes.input)} onChange={handleChangeTitleDay}/>
                 </div>
                 <div>
                     {numberOfDay > 0 ?

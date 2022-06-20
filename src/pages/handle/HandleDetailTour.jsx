@@ -29,12 +29,12 @@ const HandleDetailTour = ({ idTour, tours }) => {
                 {
                     title:'',
                     time: 'Sáng',
-                    des:[]
+                    des:['']
                 },
                 {
                     title:'',
                     time: 'Chiều',
-                    des:[]
+                    des:['']
                 }
             ]
         }])

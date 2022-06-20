@@ -68,9 +68,9 @@ const Destination = () => {
         <div className="p-3">
             <div className='flex items-center my-3'>
                 <p className='font-bold text-2xl my-0 mr-3'>List destinations</p>
-                <IconHandle type='edit' visible={checkEdit} onClick={() => setCheckHandle('edit')} />
-                <IconHandle type='delete' visible={checkDelete} onClick={handleDelete} />
-                <IconHandle type='create' onClick={() => setCheckHandle('create')} />
+                <IconHandle type='edit' animation={true} visible={checkEdit} onClick={() => setCheckHandle('edit')} />
+                <IconHandle type='delete' animation={true} visible={checkDelete} onClick={handleDelete} />
+                <IconHandle type='create' animation={true} onClick={() => setCheckHandle('create')} />
             </div>
             <div style={{ height: 400, width: '100%' }} className='bg-white rounded-2xl p-3'>
                 <DataGrid

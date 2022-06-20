@@ -75,9 +75,9 @@ const TableSchedules = ({ listTours }) => {
             <div className='my-3'>
                 <div className='flex items-center my-1'>
                     <p className='font-bold text-2xl my-0 mr-3'>List Schedule</p>
-                    <IconHandle type='edit' visible={checkEdit} onClick={() => setCheckHandle('edit')} />
-                    <IconHandle type='delete' visible={checkDelete} onClick={handleDelete} />
-                    <IconHandle type='create' onClick={() => setCheckHandle('create')} />
+                    <IconHandle type='edit' animation={true} visible={checkEdit} onClick={() => setCheckHandle('edit')} />
+                    <IconHandle type='delete' animation={true} visible={checkDelete} onClick={handleDelete} />
+                    <IconHandle type='create' animation={true} onClick={() => setCheckHandle('create')} />
                 </div>
                 <div>
                     <label htmlFor="" className='font-semibold italic mr-2'>Select tour:</label>

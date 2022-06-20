@@ -28,7 +28,7 @@ const IconHandle = (props) => {
                         {
                             'pointer-events-none text-slate-300': !visible,
                             'pointer-events-auto  text-orange-300': visible,
-                            'animate-bounce': animation
+                            'animate-bounce': animation && visible
                         }
                     )
                 }
@@ -48,7 +48,7 @@ const IconHandle = (props) => {
                         {
                             'pointer-events-none text-slate-300': !visible,
                             'pointer-events-auto text-rose-700': visible,
-                            'animate-bounce': animation
+                            'animate-bounce': animation && visible
                         }
                     )
                 }
