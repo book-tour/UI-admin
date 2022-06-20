@@ -56,7 +56,7 @@ let path = [
         component: configComponent(<HandleTour />)
     },
     {
-        path: '/tour/handle-schedule/:id',
+        path: '/tour/handle-schedule',
         component: configComponent(<HandleSchedule />)
     },
 ]

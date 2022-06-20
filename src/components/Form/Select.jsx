@@ -9,7 +9,7 @@ const Select = props => {
         <div className="mx-4">
             <p className="text-lg font-semibold my-0 mx-1">{label} :</p>
             <select
-                className="border-2 rounded-xl px-1 py-2"
+                className="border-2 rounded-xl px-1 py-2 min-w-[100px]"
                 value={value}
                 onChange={onChange}
                 disabled={disabled||false}

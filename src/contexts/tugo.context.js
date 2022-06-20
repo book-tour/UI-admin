@@ -17,6 +17,18 @@ export default class TugoContext {
         const response = api.get('/payments');
         return response;
     }
+    async getListPaymentDesc() {
+        const response = api.get('/payments/price/desc');
+        return response;
+    }
+    async getItemPayment(idPayment){
+        const response = api.get(`/payments/item/${idPayment}`);
+        return response;
+    }
+    async updatePayment(id,data){
+        const response = api.put(`/payments/${id}`, data);
+        return response;
+    }
     //====================================================== tours ==============================================================
     async getTours(){
         const response = api.get('/tours');
@@ -24,6 +36,10 @@ export default class TugoContext {
     }
     async getDetailTours(idTour){
         const response = api.get(`/detail-tour/${idTour}`);
+        return response;
+    }
+    async updateDetailTours(idTour,data){
+        const response = api.put(`/detail-tour/${idTour}`,data);
         return response;
     }
     async updateTour(idTour,data){
@@ -34,12 +50,20 @@ export default class TugoContext {
         const response = api.post('/tours', data);
         return response;
     }
-    //==================================================== schedule =========================================
+    //========================================================= schedule ==========================================================
     async getSchedules(){
         const response = api.get('/schedules');
         return response;
     }
-    // =========================================================  destinations  ========================================================================================
+    async getItemSchedule(idSchedule){
+        const response = api.get(`/schedules/${idSchedule}`);
+        return response;
+    }
+    async updateItemSchedule(idSchedule,data){
+        const response = api.put(`/schedules/${idSchedule}`,data);
+        return response;
+    }
+    // =========================================================  destinations  ===================================================
     async getListDestination() {
         const response = api.get('/destinations');
         return response;

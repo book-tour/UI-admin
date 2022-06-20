@@ -10,16 +10,22 @@ const Tour = () => {
 
 
     useEffect(async () => {
-        let tours = await tugo.getTours();
+        let tours = (await tugo.getTours()).data
+        let format = tours.map(item => {
+            
+            return {
+                ...item,
+                length: `${item.length.day} ngày ${item.length.night} đêm`
+            }
+        })
 
         console.log({ tours });
-        setListTours(tours.data);
+        setListTours(format);
     }, [])
     return (
         <div className="p-3">
             <TableTours listTours={listTours}/>
             <TableSchedules listTours={listTours}/>
-            
         </div>
     )
 }

@@ -4,7 +4,7 @@ import { DataGrid } from '@material-ui/data-grid';
 import IconHandle from '../IconHandle';
 
 import { useNavigate } from 'react-router-dom';
-
+import swal from 'sweetalert';
 
 const TableTours = ({ listTours }) => {
     const tugo = new TugoContext();
@@ -35,7 +35,7 @@ const TableTours = ({ listTours }) => {
 
     }
     const handleDelete = async () => {
-
+        swal("Cẩn thận", "Bạn không thể xóa các tour này.", "error")
     }
     const handleEdit = () => {
         navigate(`/tour/handle-tour?idTour=${listCheck[0]}`);

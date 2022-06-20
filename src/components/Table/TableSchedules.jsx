@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react';
 import TugoContext from '../../contexts/tugo.context';
 import { DataGrid } from '@material-ui/data-grid';
 import IconHandle from '../IconHandle';
-
-
+import { useNavigate } from 'react-router-dom';
+import swal from 'sweetalert';
 
 
 const TableSchedules = ({ listTours }) => {
     const tugo = new TugoContext();
+    const navigate = useNavigate();
     const [checkDelete, setCheckDelete] = useState(false);
     const [checkEdit, setCheckEdit] = useState(false);
     const [checkHandle, setCheckHandle] = useState('');
@@ -37,7 +38,15 @@ const TableSchedules = ({ listTours }) => {
         }
 
     }
-    const handleDelete = async () => { }
+    const handleDelete = async () => { 
+        swal("Cẩn thận", "Bạn không thể xóa các tour này.", "error")
+    }
+    const handleEditSchedule = () => {
+        navigate(`/tour/handle-schedule?idSchedule=${listCheck[0]}`);
+    }
+    const handleCreateSchedule = () => {
+        navigate(`/tour/handle-schedule`);
+    }
 
 
     useEffect(() => {
@@ -75,9 +84,9 @@ const TableSchedules = ({ listTours }) => {
             <div className='my-3'>
                 <div className='flex items-center my-1'>
                     <p className='font-bold text-2xl my-0 mr-3'>List Schedule</p>
-                    <IconHandle type='edit' animation={true} visible={checkEdit} onClick={() => setCheckHandle('edit')} />
+                    <IconHandle type='edit' animation={true} visible={checkEdit} onClick={handleEditSchedule} />
                     <IconHandle type='delete' animation={true} visible={checkDelete} onClick={handleDelete} />
-                    <IconHandle type='create' animation={true} onClick={() => setCheckHandle('create')} />
+                    <IconHandle type='create' animation={true} onClick={handleCreateSchedule} />
                 </div>
                 <div>
                     <label htmlFor="" className='font-semibold italic mr-2'>Select tour:</label>

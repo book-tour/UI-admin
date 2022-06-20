@@ -13,13 +13,14 @@ const Payment = () => {
     const [checkDelete, setCheckDelete] = useState(false);
     const [checkEdit, setCheckEdit] = useState(false);
     const [listCheck, setListCheck] = useState([]);
+    const [showPayment, setShowPayment] = useState(false);
 
     const handleDelete = () => {
         swal("warning", 'Không thể xóa dữ liệu', "warning");
     }
     const handleCheckBoxChange = (listIndex) => {
         console.log(listIndex);
-        
+
         setListCheck(listIndex);
         if (listIndex.length == 1) {
             setCheckEdit(true);
@@ -34,6 +35,11 @@ const Payment = () => {
             setCheckDelete(false);
         }
 
+    }
+    const handleEditPayment = () => {
+        // console.log(listCheck);
+        setShowPayment(true);
+        window.scrollTo(0, 800)
     }
     useEffect(async () => {
         let info = await tugo.getListPayment();
@@ -51,7 +57,7 @@ const Payment = () => {
         <div className="p-3">
             <div className='flex items-center my-3'>
                 <p className='font-bold text-2xl my-0 mr-3'>LIST PAYMENT</p>
-                <IconHandle type='edit' animation={true} visible={checkEdit}  />
+                <IconHandle type='edit' animation={true} visible={checkEdit} onClick={handleEditPayment}/>
                 <IconHandle type='delete' animation={true} visible={checkDelete} onClick={handleDelete} />
                 {/* <IconHandle type='create' onClick={() => setCheckHandle('create')} /> */}
             </div>
@@ -64,7 +70,9 @@ const Payment = () => {
                     onSelectionModelChange={handleCheckBoxChange}
                 />
             </div>
-            <HandlePayment />
+            {showPayment &&
+                <HandlePayment id={listCheck[0]} setShowPayment={setShowPayment}/>
+            }
         </div>
     )
 }

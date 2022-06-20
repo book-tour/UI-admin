@@ -10,59 +10,39 @@ import clsx from 'clsx';
 import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.css';
 import ItemNearestTour from '../components/ItemNearestTour';
-
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
     const tugo = new TugoContext();
     const extendFunc = new ExtendFunction();
+    const navigate = useNavigate();
     const [listNearestTour, setListNearestTour] = useState([]);
     const [listDestination, setListDestination] = useState([]);
     const [listPayment, setListPayment] = useState([]);
+    const [totalPayment, setTotalPayment] = useState(0);
 
     useEffect(async () => {
         setListNearestTour((await tugo.getItemWithSummaryInformation()).data);
         setListDestination((await tugo.getListDestination()).data);
-        setListPayment((await tugo.getListPayment()).data);
-        console.log(await tugo.getListPayment());
+
+        let infoPayment = (await tugo.getListPaymentDesc()).data;
+        setListPayment(infoPayment);
+        console.log(infoPayment);
+
+        setTotalPayment(infoPayment.reduce((total, item) => {return total+item.total_price}, 0));
     }, [])
-    const dataTour = [
-        {
-            title: 'Tour Du lịch Thổ Nhĩ Kỳ khám phá vương triều Ottoman',
-            price: '$1,200',
-            date: '20/10/2019',
-        },
-        {
-            title: 'Tour Du lịch Thổ Nhĩ Kỳ khám phá vương triều Ottoman',
-            price: '$1,200',
-            date: '20/10/2019',
-        },
-        {
-            title: 'Tour Du lịch Thổ Nhĩ Kỳ khám phá vương triều Ottoman',
-            price: '$1,200',
-            date: '20/10/2019',
-        },
-        {
-            title: 'Tour Du lịch Thổ Nhĩ Kỳ khám phá vương triều Ottoman',
-            price: '$1,200',
-            date: '20/10/2019',
-        },
-        {
-            title: 'Tour Du lịch Thổ Nhĩ Kỳ khám phá vương triều Ottoman',
-            price: '$1,200',
-            date: '20/10/2019',
-        },
-    ]
+    
     return (
         <div className='grid grid-cols-3 p-5'>
             <div className='col-span-2 px-3'>
                 <div className='bg-white rounded-2xl grid grid-cols-2 p-3 mb-4'>
                     <img src={hoian3} alt="" className=' w-full h-[180px] rounded-2xl col-span-1 px-2' />
                     <div>
-                        <p>Hey boss, welcome back!</p>
+                        <p className='text-xl font-bold'>Hey boss, welcome back!</p>
                         <p>tugo is growing and expanding its market</p>
                         <div>
-                            <Button type='submit'>Create tour</Button>
-                            <Button type='cancel'>Create destination</Button>
+                            <Button type='submit' onClick={()=> navigate('/tour/handle-tour')}>Create tour</Button>
+                            <Button type='cancel' onClick={()=> navigate('/destination')}>Create destination</Button>
                         </div>
                     </div>
                 </div>
@@ -73,7 +53,7 @@ const Home = () => {
                             <span className='text-slate-400 font-bold mx-2 text-sm'>{listNearestTour.length} tours</span>
                         </div>
                         <div>
-                            <p className='text-[#008af7] cursor-pointer hover:underline'>view all</p>
+                            <p className='text-[#008af7] cursor-pointer hover:underline' onClick={()=> navigate('/tour')}>view all</p>
                         </div>
                     </div>
                     <SimpleBar>
@@ -90,10 +70,10 @@ const Home = () => {
                     <div className='my-2 flex i justify-between mt-3'>
                         <div className='cursor-pointer'>
                             <span className='font-bold text-2xl'>List destinations</span>
-                            <span className='text-slate-400 font-bold mx-2 text-sm'>{listDestination.length} tours</span>
+                            <span className='text-slate-400 font-bold mx-2 text-sm'>{listDestination.length} destinations</span>
                         </div>
                         <div>
-                            <p className='text-[#008af7] cursor-pointer hover:underline'>view all</p>
+                            <p className='text-[#008af7] cursor-pointer hover:underline' onClick={()=> navigate('/destination')}>view all</p>
                         </div>
                     </div>
                     <SimpleBar>
@@ -117,7 +97,7 @@ const Home = () => {
                     <p className='font-bold '>Your Balance:</p>
                     <span>
                         <span>Total :</span>
-                        <span className='font-bold'>$1,000,000</span>
+                        <span className='font-bold'>{new Intl.NumberFormat('de-DE').format(totalPayment)} vnd</span>
                     </span>
                     <LineChart
                         width={400}

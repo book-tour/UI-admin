@@ -6,7 +6,9 @@ const Textarea = (props) => {
 
     return (
         <div >
-            <p className="text-lg font-semibold my-0 mx-1">{label} :</p>
+            {label &&
+                <p className="text-lg font-semibold my-0 mx-1">{label} :</p>
+            }
             <textarea
                 type={type}
                 className="border-2 rounded-xl px-1 py-2 w-full "
