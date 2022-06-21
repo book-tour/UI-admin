@@ -6,6 +6,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { makeStyles } from '@material-ui/core/styles';
 import IconHandle from "../IconHandle"
 import swal from 'sweetalert';
+import { useEffect } from "react";
 
 const Day = (props) => {
     const {
@@ -21,7 +22,7 @@ const Day = (props) => {
     const handleDeleteDay = () => {
         console.log(numberOfDay);
         swal({
-            title: `Bạn có chắc chắn muốn xóa hết lịch trình trong ngày ${numberOfDay+1}?`,
+            title: `Bạn có chắc chắn muốn xóa hết lịch trình trong ngày ${numberOfDay + 1}?`,
             text: "Sau khi xóa, muốn khôi phục hãy reload lại trang",
             icon: "warning",
         })
@@ -37,9 +38,12 @@ const Day = (props) => {
 
         let newSchedules = listSchedule;
         newSchedules[numberOfDay].title = e.target.value;
-        console.log('Bạn đang thay đổi title:',newSchedules.map(item => item.title));
+        console.log('Bạn đang thay đổi title:', newSchedules.map(item => item.title));
         setListSchedule(newSchedules);
     }
+    useEffect(() => {
+        console.log(titleInput,title);
+    }, [])
     return (
         <div>
             <div className='flex items-center justify-between w-full bg-stone-300 rounded px-2'>
@@ -49,7 +53,7 @@ const Day = (props) => {
                         <span className='mx-1'>{numberOfDay + 1}</span>
                         <span>:</span>
                     </span>
-                    <input type="text" value={titleInput} className={clsx('rounded p-3 bg-stone-300	w-full', classes.input)} onChange={handleChangeTitleDay}/>
+                    <input type="text" value={titleInput} className={clsx('rounded p-3 bg-stone-300	w-full', classes.input)} onChange={handleChangeTitleDay} />
                 </div>
                 <div>
                     {numberOfDay > 0 ?

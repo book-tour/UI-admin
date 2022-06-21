@@ -9,7 +9,7 @@ export default class TugoContext {
         return response;
     }
     async getItemWithSummaryInformation() {
-        const response = api.get('/tours');
+        const response = api.get('/tours/items/active');
         return response;
     }
    

@@ -81,8 +81,9 @@ const Destination = () => {
                     onSelectionModelChange={handleCheckBoxChange}
                 />
             </div>
-
-            <HandleDestination visible={checkHandle} data={listDestination} listCheck={listCheck} setVisible={setCheckHandle} />
+            {checkHandle &&
+                <HandleDestination visible={checkHandle} data={listDestination} idDestination={listCheck[0]} setVisible={setCheckHandle} />
+            }
         </div>
     )
 }

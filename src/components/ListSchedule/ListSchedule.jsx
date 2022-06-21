@@ -16,7 +16,7 @@ const ListSchedule = (props) => {
             {listSchedule.map((schedule, index) => {
                 return (
                     <>
-                        <Day schedule={schedule.schedule} title={schedule.title || ''} numberOfDay={index} key={index} setListSchedule={setListSchedule} listSchedule={listSchedule}/>
+                        <Day schedule={schedule.schedule} title={schedule.title} numberOfDay={index} key={index} setListSchedule={setListSchedule} listSchedule={listSchedule}/>
                     </>
                 )
             })}

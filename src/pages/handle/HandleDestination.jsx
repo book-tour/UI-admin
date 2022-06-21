@@ -11,7 +11,7 @@ import ExtendFunction from '../../utils/extendFunction';
 import swal from 'sweetalert';
 // cái form để tạo mới hoặc edit
 const HandleDestination = (props) => {
-    const { visible, data, listCheck, setVisible } = props;
+    const { visible, data, idDestination, setVisible } = props;
     const tugo = new TugoContext();
     const extendFunc = new ExtendFunction();
 
@@ -100,8 +100,8 @@ const HandleDestination = (props) => {
         console.log(list);
         console.log(data);
         setListDistricts(list)
-        if (visible === 'edit' && listCheck.length === 1) {
-            let infoDestination = data[listCheck[0] - 1]
+        if (visible === 'edit') {
+            let infoDestination = data.filter(item => item.id === idDestination)[0]
             console.log(infoDestination);
 
             setListThumbnail(infoDestination.listThumbnail)
@@ -115,7 +115,7 @@ const HandleDestination = (props) => {
         }
         else if (visible === 'create') {
             setListThumbnail([])
-            setId(data.length + 1);
+            setId(data[data.length - 1].id + 1);
             setName('');
             setDescription('');
             setAlias('');
@@ -123,117 +123,113 @@ const HandleDestination = (props) => {
             setFileImage([])
             setBase64([])
         }
-    }, [visible, listCheck])
+    }, [])
 
     return (
         <div>
-            {visible !== '' ?
-                <>
-                    <p className="font-bold text-2xl mx-2 my-4">Handle Destination</p>
-                    <div className="bg-white rounded-2xl p-3">
-                        <div>
-                            <div>
-                                <p className='font-bold text-2xl'>Hình ảnh:</p>
-                                <hr />
-                                <div className='grid grid-cols-5'>
-                                    {listThumbnail && listThumbnail.length > 0 ?
-                                        listThumbnail.map((item, index) => {
-                                            return (
-                                                <img
-                                                    src={item}
-                                                    alt=""
-                                                    key={index}
-                                                    className="w-full col-span-1 h-[200px] cursor-pointer rounded-xl m-2 hover:blur-sm px-2	"
-                                                    title='Click to remove'
-                                                    onClick={function () {
-                                                        let newArr = listThumbnail.filter((item, i) => i !== index)
-                                                        setListThumbnail(newArr)
-                                                    }}
-                                                />
-                                            )
-                                        })
-                                        : null
-                                    }
-                                    {base64 && base64.length > 0 ?
-                                        base64.map((item, index) => {
-                                            return (
-                                                <img
-                                                    src={item}
-                                                    alt=""
-                                                    key={index}
-                                                    className="w-full col-span-1 h-[200px] cursor-pointer rounded-xl m-2 hover:blur-sm px-2"
-                                                    title='Click to remove'
-                                                    onClick={() => {
-                                                        setFileImage(fileImage.filter((item, i) => i !== index))
-                                                        setBase64(base64.filter((item, i) => i !== index))
-                                                    }}
-                                                />
-                                            )
-                                        })
-                                        : null
-                                    }
-                                    <label htmlFor='file' className='w-full col-span-1 h-[200px]  cursor-pointer rounded-xl  flex items-center hover:opacity-75'>
-                                        <AddCircleOutlineIcon className='m-auto text-green-400 ' style={{ fontSize: '35px' }} />
-                                    </label>
-                                    <input
-                                        type='file'
-                                        id='file'
-                                        // title='Click to add'
-                                        style={{ display: 'none' }}
-                                        onChange={handleAddImage}
-                                    >
-                                    </input>
-                                </div>
-                            </div>
-                            <div className='mt-6'>
-                                <p className='font-bold text-2xl'>Thông tin chi tiết điểm đến</p>
-                                <hr />
-                                <div className='flex items-center'>
-                                    <Input
-                                        type='text'
-                                        value={id || ''}
-                                        onChange={(e) => setId(e.target.value)}
-                                        disabled={true}
-                                        label='ID'
-                                        title='Bạn không được phép sửa trường này.'
-                                    />
-                                    <Input
-                                        type='text'
-                                        value={alias || ''}
-                                        onChange={(e) => setAlias(e.target.value)}
-                                        label='Mã định danh'
-                                        disabled={true}
-                                        title='Bạn không được phép sửa trường này.'
-                                    />
-                                    <Select
-                                        label='Tên điểm đến'
-                                        options={listDistricts}
-                                        value={name || ''}
-                                        onChange={(e) => {
-                                            setName(e.target.value)
-                                            let a = listDistricts.filter(district => district.name === e.target.value).map(x => x.codename)
-                                            setAlias(a[0])
-                                        }}
-                                        disabled={visible == 'create' ? false : true}
-                                        title='Bạn không được phép sửa trường này.'
-                                    />
-                                </div>
-                                <Textarea
-                                    label='Mô tả'
-                                    value={description || ''}
-                                    onChange={(e) => setDescription(e.target.value)}
-                                />
-                            </div>
-                            <div className=' text-right'>
-                                <Button type='cancel' onClick={() => setVisible('')}>Cancel</Button>
-                                <Button type='submit' onClick={handleSubmit}>Submit</Button>
-                            </div>
+
+            <p className="font-bold text-2xl mx-2 my-4">Handle Destination</p>
+            <div className="bg-white rounded-2xl p-3">
+                <div>
+                    <div>
+                        <p className='font-bold text-2xl'>Hình ảnh:</p>
+                        <hr />
+                        <div className='grid grid-cols-5'>
+                            {listThumbnail && listThumbnail.length > 0 ?
+                                listThumbnail.map((item, index) => {
+                                    return (
+                                        <img
+                                            src={item}
+                                            alt=""
+                                            key={index}
+                                            className="w-full col-span-1 h-[200px] cursor-pointer rounded-xl m-2 hover:blur-sm px-2	"
+                                            title='Click to remove'
+                                            onClick={function () {
+                                                let newArr = listThumbnail.filter((item, i) => i !== index)
+                                                setListThumbnail(newArr)
+                                            }}
+                                        />
+                                    )
+                                })
+                                : null
+                            }
+                            {base64 && base64.length > 0 ?
+                                base64.map((item, index) => {
+                                    return (
+                                        <img
+                                            src={item}
+                                            alt=""
+                                            key={index}
+                                            className="w-full col-span-1 h-[200px] cursor-pointer rounded-xl m-2 hover:blur-sm px-2"
+                                            title='Click to remove'
+                                            onClick={() => {
+                                                setFileImage(fileImage.filter((item, i) => i !== index))
+                                                setBase64(base64.filter((item, i) => i !== index))
+                                            }}
+                                        />
+                                    )
+                                })
+                                : null
+                            }
+                            <label htmlFor='file' className='w-full col-span-1 h-[200px]  cursor-pointer rounded-xl  flex items-center hover:opacity-75'>
+                                <AddCircleOutlineIcon className='m-auto text-green-400 ' style={{ fontSize: '35px' }} />
+                            </label>
+                            <input
+                                type='file'
+                                id='file'
+                                // title='Click to add'
+                                style={{ display: 'none' }}
+                                onChange={handleAddImage}
+                            >
+                            </input>
                         </div>
                     </div>
-                </>
-                :
-                null
-            }
+                    <div className='mt-6'>
+                        <p className='font-bold text-2xl'>Thông tin chi tiết điểm đến</p>
+                        <hr />
+                        <div className='flex items-center'>
+                            <Input
+                                type='text'
+                                value={id || ''}
+                                onChange={(e) => setId(e.target.value)}
+                                disabled={true}
+                                label='ID'
+                                title='Bạn không được phép sửa trường này.'
+                            />
+                            <Input
+                                type='text'
+                                value={alias || ''}
+                                onChange={(e) => setAlias(e.target.value)}
+                                label='Mã định danh'
+                                disabled={true}
+                                title='Bạn không được phép sửa trường này.'
+                            />
+                            <Select
+                                label='Tên điểm đến'
+                                options={listDistricts}
+                                value={name || ''}
+                                onChange={(e) => {
+                                    setName(e.target.value)
+                                    let a = listDistricts.filter(district => district.name === e.target.value).map(x => x.codename)
+                                    setAlias(a[0])
+                                }}
+                                disabled={visible == 'create' ? false : true}
+                                title='Bạn không được phép sửa trường này.'
+                            />
+                        </div>
+                        <Textarea
+                            label='Mô tả'
+                            value={description || ''}
+                            onChange={(e) => setDescription(e.target.value)}
+                        />
+                    </div>
+                    <div className=' text-right'>
+                        <Button type='cancel' onClick={() => setVisible('')}>Cancel</Button>
+                        <Button type='submit' onClick={handleSubmit}>Submit</Button>
+                    </div>
+                </div>
+            </div>
+
         </div>
     )
 }

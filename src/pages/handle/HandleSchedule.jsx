@@ -188,13 +188,13 @@ const HandleSchedule = () => {
                 <div className='flex flex-wrap gap-3 my-3'>
                     <Input
                         type='number'
-                        value={hotel || 0}
+                        value={hotel}
                         onChange={(e) => setHotel(e.target.value)}
                         label='Giá khách sạn'
                     />
                     <Input
                         type='text'
-                        value={hotelFeature || 0}
+                        value={hotelFeature}
                         onChange={(e) => setHotelFeature(e.target.value)}
                         label='Loại khách sạn'
                     />

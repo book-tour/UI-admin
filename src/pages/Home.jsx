@@ -22,7 +22,9 @@ const Home = () => {
     const [totalPayment, setTotalPayment] = useState(0);
 
     useEffect(async () => {
-        setListNearestTour((await tugo.getItemWithSummaryInformation()).data);
+        let infoNearestTour = await tugo.getItemWithSummaryInformation()
+        console.log(infoNearestTour); 
+        setListNearestTour(infoNearestTour.data);
         setListDestination((await tugo.getListDestination()).data);
 
         let infoPayment = (await tugo.getListPaymentDesc()).data;
