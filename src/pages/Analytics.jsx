@@ -26,7 +26,7 @@ const Analytics = () => {
                 <ComposedChart
                     width={1200}
                     height={400}
-                    data={data1}
+                    data={data}
                     margin={{
                         top: 20,
                         right: 20,
@@ -40,8 +40,8 @@ const Analytics = () => {
                     <Tooltip />
                     <Legend />
                     {/* <Area type="monotone" dataKey="amt" fill="#8884d8" stroke="#8884d8" /> */}
-                    <Bar dataKey="money" barSize={50} fill="#413ea0" />
-                    <Line type="monotone" dataKey="member" stroke="#ff7300" />
+                    <Bar dataKey="value" barSize={50} fill="#413ea0" />
+                    {/* <Line type="monotone" dataKey="member" stroke="#ff7300" /> */}
                     {/* <Scatter dataKey="cnt" fill="red" /> */}
                 </ComposedChart>
                 <p className='font-semibold text-xl text-center'>THỐNG KÊ TRONG NĂM 2021</p>
@@ -141,60 +141,60 @@ const data1 = [
         amt: 1228,
         cnt: 480
     },
-    {
-        name: "May",
-        member: 1520,
-        money: 1108,
-        amt: 1100,
-        cnt: 460
-    },
-    {
-        name: "June",
-        member: 1400,
-        money: 680,
-        amt: 1700,
-        cnt: 380
-    },
-    {
-        name: "July",
-        member: 1400,
-        money: 680,
-        amt: 1700,
-        cnt: 380
-    },
-    {
-        name: "August",
-        member: 1400,
-        money: 680,
-        amt: 1700,
-        cnt: 380
-    },
-    {
-        name: "September",
-        member: 1400,
-        money: 680,
-        amt: 1700,
-        cnt: 380
-    },
-    {
-        name: "October",
-        member: 1400,
-        money: 680,
-        amt: 1700,
-        cnt: 380
-    },
-    {
-        name: "November",
-        member: 1400,
-        money: 680,
-        amt: 1700,
-        cnt: 380
-    },
-    {
-        name: "December",
-        member: 1400,
-        money: 680,
-        amt: 1700,
-        cnt: 380
-    }
+    // {
+    //     name: "May",
+    //     member: 1520,
+    //     money: 1108,
+    //     amt: 1100,
+    //     cnt: 460
+    // },
+    // {
+    //     name: "June",
+    //     member: 1400,
+    //     money: 680,
+    //     amt: 1700,
+    //     cnt: 380
+    // },
+    // {
+    //     name: "July",
+    //     member: 1400,
+    //     money: 680,
+    //     amt: 1700,
+    //     cnt: 380
+    // },
+    // {
+    //     name: "August",
+    //     member: 1400,
+    //     money: 680,
+    //     amt: 1700,
+    //     cnt: 380
+    // },
+    // {
+    //     name: "September",
+    //     member: 1400,
+    //     money: 680,
+    //     amt: 1700,
+    //     cnt: 380
+    // },
+    // {
+    //     name: "October",
+    //     member: 1400,
+    //     money: 680,
+    //     amt: 1700,
+    //     cnt: 380
+    // },
+    // {
+    //     name: "November",
+    //     member: 1400,
+    //     money: 680,
+    //     amt: 1700,
+    //     cnt: 380
+    // },
+    // {
+    //     name: "December",
+    //     member: 1400,
+    //     money: 680,
+    //     amt: 1700,
+    //     cnt: 380
+    // }
 ];
